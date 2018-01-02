@@ -1,0 +1,78 @@
+swagger: '2.0'
+info:
+  description: This is a MTDI Api
+  version: 1.0.0
+  title: Swagger Petstore
+host: hmrc.gov.uk
+basePath: /v1
+paths:
+  /createStore:
+   post:
+      tags:
+      - "IbdStore"
+      summary: Add a new income store
+      description: ''
+      operationId: "addStore"
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: income store object that needs to be added to the IBD
+          required: true
+          schema:
+            $ref: '#/definitions/store'
+      responses:
+        '200':
+          description: OK
+        '405':
+          description: Invalid input
+        '500':
+          description: Internal Server Error
+  /createStore/{id}:
+   get:
+      tags:
+      - "IbdStore"
+      summary: get a new income store
+      description: ''
+      operationId: "getStore"
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: "id"
+          in: query
+          description: Id of store object
+          required: true
+          type: "string"
+      responses:
+        '200':
+          description: OK
+        '405':
+          description: Invalid input
+        '500':
+          description: Internal Server Error
+                            
+definitions:
+  store:
+    type: object
+    properties:
+      accountingStartDate:
+        type: string
+        format: date
+      accountingEndDate:
+        type: string
+        format: date
+      businessName:
+        type: string
+      contractObjectId:
+        type: integer
+        format: int64
+      nino:
+        type: string
+      type:
+        type: integer
+        format: int64
