@@ -63,22 +63,4 @@ public interface IbdStoreApi {
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
     }
 
-
-    @ApiOperation(value = "get a new income store", nickname = "getStore", notes = "", tags={ "IbdStore", })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "OK"),
-        @ApiResponse(code = 405, message = "Invalid input"),
-        @ApiResponse(code = 500, message = "Internal Server Error") })
-    @RequestMapping(value = "/createStore/{id}",
-        produces = { "application/json" }, 
-        consumes = { "application/json" },
-        method = RequestMethod.GET)
-    default ResponseEntity<Void> getStore(@NotNull @ApiParam(value = "Id of store object", required = true) @Valid @RequestParam(value = "id", required = true) String id) {
-        if(getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
-        } else {
-            log.warn("ObjectMapper or HttpServletRequest not configured in default IbdStoreApi interface so no example is generated");
-        }
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-    }
-
 }
