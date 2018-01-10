@@ -46,7 +46,12 @@ public interface IbdStoreApi {
         return getRequest().map(r -> r.getHeader("Accept"));
     }
 
-    @ApiOperation(value = "Add a new income store", nickname = "addStore", notes = "", tags={ "IbdStore", })
+    @ApiOperation(value = "Add a new income store", nickname = "addStore", notes = "", authorizations = {
+        @Authorization(value = "MTDI_auth", scopes = {
+            @AuthorizationScope(scope = "write:income", description = "modify income store"),
+            @AuthorizationScope(scope = "read:income", description = "read income stoe")
+            })
+    }, tags={ "IbdStore", })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "OK"),
         @ApiResponse(code = 405, message = "Invalid input"),
@@ -57,6 +62,84 @@ public interface IbdStoreApi {
         method = RequestMethod.POST)
     default ResponseEntity<Void> addStore(@ApiParam(value = "income store object that needs to be added to the IBD" ,required=true )  @Valid @RequestBody Store body) {
         if(getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
+        } else {
+            log.warn("ObjectMapper or HttpServletRequest not configured in default IbdStoreApi interface so no example is generated");
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+    }
+
+
+    @ApiOperation(value = "Get a income store by ID", nickname = "getAllStore", notes = "get a income store by ID", response = Store.class, tags={ "IbdStore", })
+    @ApiResponses(value = { 
+        @ApiResponse(code = 200, message = "Income store object", response = Store.class),
+        @ApiResponse(code = 405, message = "Invalid input"),
+        @ApiResponse(code = 500, message = "Internal Server Error") })
+    @RequestMapping(value = "/getAllStore",
+        produces = { "application/json" }, 
+        consumes = { "application/json" },
+        method = RequestMethod.GET)
+    default ResponseEntity<Store> getAllStore(@ApiParam(value = "Id of store object",required=true) @PathVariable("id") String id) {
+        if(getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
+            if (getAcceptHeader().get().contains("application/json")) {
+                try {
+                    return new ResponseEntity<>(getObjectMapper().get().readValue("{  \"accountingStartDate\" : \"2000-01-23\",  \"accountingEndDate\" : \"2000-01-23\",  \"businessName\" : \"businessName\",  \"type\" : 6,  \"contractObjectId\" : 0,  \"nino\" : \"nino\"}", Store.class), HttpStatus.NOT_IMPLEMENTED);
+                } catch (IOException e) {
+                    log.error("Couldn't serialize response for content type application/json", e);
+                    return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+                }
+            }
+        } else {
+            log.warn("ObjectMapper or HttpServletRequest not configured in default IbdStoreApi interface so no example is generated");
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+    }
+
+
+    @ApiOperation(value = "Get a income store by ID", nickname = "getStore", notes = "get a income store by ID", response = Store.class, tags={ "IbdStore", })
+    @ApiResponses(value = { 
+        @ApiResponse(code = 200, message = "Income store object", response = Store.class),
+        @ApiResponse(code = 405, message = "Invalid input"),
+        @ApiResponse(code = 500, message = "Internal Server Error") })
+    @RequestMapping(value = "/getStore/{id}",
+        produces = { "application/json" }, 
+        consumes = { "application/json" },
+        method = RequestMethod.GET)
+    default ResponseEntity<Store> getStore(@ApiParam(value = "Id of store object",required=true) @PathVariable("id") String id) {
+        if(getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
+            if (getAcceptHeader().get().contains("application/json")) {
+                try {
+                    return new ResponseEntity<>(getObjectMapper().get().readValue("{  \"accountingStartDate\" : \"2000-01-23\",  \"accountingEndDate\" : \"2000-01-23\",  \"businessName\" : \"businessName\",  \"type\" : 6,  \"contractObjectId\" : 0,  \"nino\" : \"nino\"}", Store.class), HttpStatus.NOT_IMPLEMENTED);
+                } catch (IOException e) {
+                    log.error("Couldn't serialize response for content type application/json", e);
+                    return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+                }
+            }
+        } else {
+            log.warn("ObjectMapper or HttpServletRequest not configured in default IbdStoreApi interface so no example is generated");
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+    }
+
+
+    @ApiOperation(value = "update a income store by ID", nickname = "putStore", notes = "udpate a income store by ID", response = Store.class, responseContainer = "List", tags={ "IbdStore", })
+    @ApiResponses(value = { 
+        @ApiResponse(code = 200, message = "All Income store object", response = Store.class, responseContainer = "List"),
+        @ApiResponse(code = 405, message = "Invalid input"),
+        @ApiResponse(code = 500, message = "Internal Server Error") })
+    @RequestMapping(value = "/getStore/{id}",
+        produces = { "application/json" }, 
+        consumes = { "application/json" },
+        method = RequestMethod.PUT)
+    default ResponseEntity<List<Store>> putStore(@ApiParam(value = "Id of store object",required=true) @PathVariable("id") String id) {
+        if(getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
+            if (getAcceptHeader().get().contains("application/json")) {
+                try {
+                    return new ResponseEntity<>(getObjectMapper().get().readValue("[ {  \"accountingStartDate\" : \"2000-01-23\",  \"accountingEndDate\" : \"2000-01-23\",  \"businessName\" : \"businessName\",  \"type\" : 6,  \"contractObjectId\" : 0,  \"nino\" : \"nino\"}, {  \"accountingStartDate\" : \"2000-01-23\",  \"accountingEndDate\" : \"2000-01-23\",  \"businessName\" : \"businessName\",  \"type\" : 6,  \"contractObjectId\" : 0,  \"nino\" : \"nino\"} ]", List.class), HttpStatus.NOT_IMPLEMENTED);
+                } catch (IOException e) {
+                    log.error("Couldn't serialize response for content type application/json", e);
+                    return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+                }
+            }
         } else {
             log.warn("ObjectMapper or HttpServletRequest not configured in default IbdStoreApi interface so no example is generated");
         }
