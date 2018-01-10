@@ -34,9 +34,6 @@ public class Store  implements Serializable {
   @JsonProperty("nino")
   private String nino = null;
 
-  @JsonProperty("type")
-  private Long type = null;
-
   public Store accountingStartDate(LocalDate accountingStartDate) {
     this.accountingStartDate = accountingStartDate;
     return this;
@@ -46,7 +43,7 @@ public class Store  implements Serializable {
    * Get accountingStartDate
    * @return accountingStartDate
   **/
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(example = "22/06/1987", value = "")
 
   @Valid
 
@@ -67,7 +64,7 @@ public class Store  implements Serializable {
    * Get accountingEndDate
    * @return accountingEndDate
   **/
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(example = "22/06/2020", value = "")
 
   @Valid
 
@@ -88,7 +85,7 @@ public class Store  implements Serializable {
    * Get businessName
    * @return businessName
   **/
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(example = "Jon", value = "")
 
 
   public String getBusinessName() {
@@ -108,7 +105,7 @@ public class Store  implements Serializable {
    * Get contractObjectId
    * @return contractObjectId
   **/
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(example = "123456789", value = "")
 
 
   public Long getContractObjectId() {
@@ -128,7 +125,7 @@ public class Store  implements Serializable {
    * Get nino
    * @return nino
   **/
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(example = "AB123456CD", value = "")
 
 
   public String getNino() {
@@ -137,26 +134,6 @@ public class Store  implements Serializable {
 
   public void setNino(String nino) {
     this.nino = nino;
-  }
-
-  public Store type(Long type) {
-    this.type = type;
-    return this;
-  }
-
-   /**
-   * Get type
-   * @return type
-  **/
-  @ApiModelProperty(value = "")
-
-
-  public Long getType() {
-    return type;
-  }
-
-  public void setType(Long type) {
-    this.type = type;
   }
 
 
@@ -173,13 +150,12 @@ public class Store  implements Serializable {
         Objects.equals(this.accountingEndDate, store.accountingEndDate) &&
         Objects.equals(this.businessName, store.businessName) &&
         Objects.equals(this.contractObjectId, store.contractObjectId) &&
-        Objects.equals(this.nino, store.nino) &&
-        Objects.equals(this.type, store.type);
+        Objects.equals(this.nino, store.nino);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(accountingStartDate, accountingEndDate, businessName, contractObjectId, nino, type);
+    return Objects.hash(accountingStartDate, accountingEndDate, businessName, contractObjectId, nino);
   }
 
   @Override
@@ -192,7 +168,6 @@ public class Store  implements Serializable {
     sb.append("    businessName: ").append(toIndentedString(businessName)).append("\n");
     sb.append("    contractObjectId: ").append(toIndentedString(contractObjectId)).append("\n");
     sb.append("    nino: ").append(toIndentedString(nino)).append("\n");
-    sb.append("    type: ").append(toIndentedString(type)).append("\n");
     sb.append("}");
     return sb.toString();
   }

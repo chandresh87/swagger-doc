@@ -74,7 +74,7 @@ public interface IbdStoreApi {
         @ApiResponse(code = 200, message = "Income store object", response = Store.class),
         @ApiResponse(code = 405, message = "Invalid input"),
         @ApiResponse(code = 500, message = "Internal Server Error") })
-    @RequestMapping(value = "/getAllStore",
+    @RequestMapping(value = "/getAllStore/{id}",
         produces = { "application/json" }, 
         consumes = { "application/json" },
         method = RequestMethod.GET)
@@ -82,7 +82,7 @@ public interface IbdStoreApi {
         if(getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
             if (getAcceptHeader().get().contains("application/json")) {
                 try {
-                    return new ResponseEntity<>(getObjectMapper().get().readValue("{  \"accountingStartDate\" : \"2000-01-23\",  \"accountingEndDate\" : \"2000-01-23\",  \"businessName\" : \"businessName\",  \"type\" : 6,  \"contractObjectId\" : 0,  \"nino\" : \"nino\"}", Store.class), HttpStatus.NOT_IMPLEMENTED);
+                    return new ResponseEntity<>(getObjectMapper().get().readValue("{  \"accountingStartDate\" : \"22/06/1987\",  \"accountingEndDate\" : \"22/06/2020\",  \"businessName\" : \"Jon\",  \"contractObjectId\" : 123456789,  \"nino\" : \"AB123456CD\"}", Store.class), HttpStatus.NOT_IMPLEMENTED);
                 } catch (IOException e) {
                     log.error("Couldn't serialize response for content type application/json", e);
                     return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -108,7 +108,7 @@ public interface IbdStoreApi {
         if(getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
             if (getAcceptHeader().get().contains("application/json")) {
                 try {
-                    return new ResponseEntity<>(getObjectMapper().get().readValue("{  \"accountingStartDate\" : \"2000-01-23\",  \"accountingEndDate\" : \"2000-01-23\",  \"businessName\" : \"businessName\",  \"type\" : 6,  \"contractObjectId\" : 0,  \"nino\" : \"nino\"}", Store.class), HttpStatus.NOT_IMPLEMENTED);
+                    return new ResponseEntity<>(getObjectMapper().get().readValue("{  \"accountingStartDate\" : \"22/06/1987\",  \"accountingEndDate\" : \"22/06/2020\",  \"businessName\" : \"Jon\",  \"contractObjectId\" : 123456789,  \"nino\" : \"AB123456CD\"}", Store.class), HttpStatus.NOT_IMPLEMENTED);
                 } catch (IOException e) {
                     log.error("Couldn't serialize response for content type application/json", e);
                     return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -134,7 +134,7 @@ public interface IbdStoreApi {
         if(getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
             if (getAcceptHeader().get().contains("application/json")) {
                 try {
-                    return new ResponseEntity<>(getObjectMapper().get().readValue("[ {  \"accountingStartDate\" : \"2000-01-23\",  \"accountingEndDate\" : \"2000-01-23\",  \"businessName\" : \"businessName\",  \"type\" : 6,  \"contractObjectId\" : 0,  \"nino\" : \"nino\"}, {  \"accountingStartDate\" : \"2000-01-23\",  \"accountingEndDate\" : \"2000-01-23\",  \"businessName\" : \"businessName\",  \"type\" : 6,  \"contractObjectId\" : 0,  \"nino\" : \"nino\"} ]", List.class), HttpStatus.NOT_IMPLEMENTED);
+                    return new ResponseEntity<>(getObjectMapper().get().readValue("[ {  \"accountingStartDate\" : \"22/06/1987\",  \"accountingEndDate\" : \"22/06/2020\",  \"businessName\" : \"Jon\",  \"contractObjectId\" : 123456789,  \"nino\" : \"AB123456CD\"}, {  \"accountingStartDate\" : \"22/06/1987\",  \"accountingEndDate\" : \"22/06/2020\",  \"businessName\" : \"Jon\",  \"contractObjectId\" : 123456789,  \"nino\" : \"AB123456CD\"} ]", List.class), HttpStatus.NOT_IMPLEMENTED);
                 } catch (IOException e) {
                     log.error("Couldn't serialize response for content type application/json", e);
                     return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
