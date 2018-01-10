@@ -43,7 +43,8 @@ public class Store  implements Serializable {
    * Get accountingStartDate
    * @return accountingStartDate
   **/
-  @ApiModelProperty(example = "22/06/1987", value = "")
+  @ApiModelProperty(example = "22/06/1987", required = true, value = "")
+  @NotNull
 
   @Valid
 
@@ -64,7 +65,8 @@ public class Store  implements Serializable {
    * Get accountingEndDate
    * @return accountingEndDate
   **/
-  @ApiModelProperty(example = "22/06/2020", value = "")
+  @ApiModelProperty(example = "22/06/2020", required = true, value = "")
+  @NotNull
 
   @Valid
 
@@ -125,7 +127,8 @@ public class Store  implements Serializable {
    * Get nino
    * @return nino
   **/
-  @ApiModelProperty(example = "AB123456CD", value = "")
+  @ApiModelProperty(example = "AB123456CD", required = true, value = "")
+  @NotNull
 
 
   public String getNino() {
