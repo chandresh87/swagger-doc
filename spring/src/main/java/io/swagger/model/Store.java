@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import io.swagger.model.Address;
 import java.time.LocalDate;
 import java.io.Serializable;
 import org.springframework.validation.annotation.Validated;
@@ -33,6 +34,9 @@ public class Store  implements Serializable {
 
   @JsonProperty("nino")
   private String nino = null;
+
+  @JsonProperty("address")
+  private Address address = null;
 
   public Store accountingStartDate(LocalDate accountingStartDate) {
     this.accountingStartDate = accountingStartDate;
@@ -139,6 +143,27 @@ public class Store  implements Serializable {
     this.nino = nino;
   }
 
+  public Store address(Address address) {
+    this.address = address;
+    return this;
+  }
+
+   /**
+   * Get address
+   * @return address
+  **/
+  @ApiModelProperty(value = "")
+
+  @Valid
+
+  public Address getAddress() {
+    return address;
+  }
+
+  public void setAddress(Address address) {
+    this.address = address;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -153,12 +178,13 @@ public class Store  implements Serializable {
         Objects.equals(this.accountingEndDate, store.accountingEndDate) &&
         Objects.equals(this.businessName, store.businessName) &&
         Objects.equals(this.contractObjectId, store.contractObjectId) &&
-        Objects.equals(this.nino, store.nino);
+        Objects.equals(this.nino, store.nino) &&
+        Objects.equals(this.address, store.address);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(accountingStartDate, accountingEndDate, businessName, contractObjectId, nino);
+    return Objects.hash(accountingStartDate, accountingEndDate, businessName, contractObjectId, nino, address);
   }
 
   @Override
@@ -171,6 +197,7 @@ public class Store  implements Serializable {
     sb.append("    businessName: ").append(toIndentedString(businessName)).append("\n");
     sb.append("    contractObjectId: ").append(toIndentedString(contractObjectId)).append("\n");
     sb.append("    nino: ").append(toIndentedString(nino)).append("\n");
+    sb.append("    address: ").append(toIndentedString(address)).append("\n");
     sb.append("}");
     return sb.toString();
   }
