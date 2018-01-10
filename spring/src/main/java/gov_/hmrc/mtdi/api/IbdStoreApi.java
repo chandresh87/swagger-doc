@@ -5,6 +5,7 @@
  */
 package gov_.hmrc.mtdi.api;
 
+import io.swagger.model.CommonAPI100definitionsError;
 import io.swagger.model.Store;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.annotations.*;
@@ -124,7 +125,7 @@ public interface IbdStoreApi {
     @ApiOperation(value = "update a income store by ID", nickname = "putStore", notes = "udpate a income store by ID", response = Store.class, responseContainer = "List", tags={ "IbdStore", })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "All Income store object", response = Store.class, responseContainer = "List"),
-        @ApiResponse(code = 405, message = "Invalid input"),
+        @ApiResponse(code = 405, message = "Invalid input", response = CommonAPI100definitionsError.class),
         @ApiResponse(code = 500, message = "Internal Server Error") })
     @RequestMapping(value = "/getStore/{id}",
         produces = { "application/json" }, 
